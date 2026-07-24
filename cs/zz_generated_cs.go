@@ -18453,28 +18453,6 @@ func (s *Service) SetCsTagsTemplate(ctx context.Context, p SetCsTagsTemplatePara
 	return s.C.Invoke(ctx, teamsapi.Op{CmdletName: "Set-CsTagsTemplate", Transport: teamsapi.ConfigAPI, Kind: teamsapi.AutoRest, Method: "PUT", Path: "/Teams.VoiceApps/ivr-tags-template/"}, p.params())
 }
 
-// SetCsTeamsSettingsCustomAppParams are the bound parameters for Set-CsTeamsSettingsCustomApp.
-type SetCsTeamsSettingsCustomAppParams struct {
-	IsSideloadedAppsInteractionEnabled *bool    `ps:"isSideloadedAppsInteractionEnabled"`
-	HttpPipelinePrepend                []string `ps:"HttpPipelinePrepend"`
-}
-
-func (p SetCsTeamsSettingsCustomAppParams) params() map[string]any {
-	m := map[string]any{}
-	if p.IsSideloadedAppsInteractionEnabled != nil {
-		m["isSideloadedAppsInteractionEnabled"] = *p.IsSideloadedAppsInteractionEnabled
-	}
-	if len(p.HttpPipelinePrepend) > 0 {
-		m["HttpPipelinePrepend"] = p.HttpPipelinePrepend
-	}
-	return m
-}
-
-// SetCsTeamsSettingsCustomApp runs Set-CsTeamsSettingsCustomApp.
-func (s *Service) SetCsTeamsSettingsCustomApp(ctx context.Context, p SetCsTeamsSettingsCustomAppParams) (*teamsapi.Result, error) {
-	return s.C.Invoke(ctx, teamsapi.Op{CmdletName: "Set-CsTeamsSettingsCustomApp", Transport: teamsapi.ConfigAPI, Kind: teamsapi.AutoRest, Method: "PUT", Path: "/Teams.MiddletierService/tenantWideAppsSettingsGlobal"}, p.params())
-}
-
 // SetCsTeamsShiftsConnectionParams are the bound parameters for Set-CsTeamsShiftsConnection.
 type SetCsTeamsShiftsConnectionParams struct {
 	ConnectionId               string   `ps:"ConnectionId"`

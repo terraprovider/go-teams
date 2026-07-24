@@ -28,6 +28,18 @@ var verbKind = map[string]string{
 	"Remove": "PolicyRemove",
 }
 
+// customCmdlets are cmdlets whose public behaviour is not a plain autorest call,
+// so gen-go must NOT emit a binding for them — a hand-written override in the cs
+// package provides the method (and its Params type) instead. This mirrors the
+// module's own custom/ wrappers.
+//
+//	Set-CsTeamsSettingsCustomApp: the MiddletierService PUT replaces the whole
+//	  tenant-wide app-settings object and rejects a partial body, so the override
+//	  does a read-modify-write (see cs/customapp.go).
+var customCmdlets = map[string]bool{
+	"Set-CsTeamsSettingsCustomApp": true,
+}
+
 func main() {
 	cat, err := spec.Teams()
 	if err != nil {
@@ -93,7 +105,7 @@ func main() {
 	sort.Strings(arNames)
 	for _, name := range arNames {
 		cm, ok := byName[name]
-		if !ok || done[name] {
+		if !ok || done[name] || customCmdlets[name] {
 			continue
 		}
 		emitCmdlet(&b, cm, autorestOp(cm, routes[name]))
