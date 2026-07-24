@@ -11,3 +11,7 @@ testdata/live-*
 /gen-go
 /gen-models
 *.test
+
+# Local dev multi-module workspace (points at sibling checkouts)
+go.work
+go.work.sum

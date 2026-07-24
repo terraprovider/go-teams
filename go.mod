@@ -2,7 +2,7 @@ module github.com/terraprovider/go-teams
 
 go 1.26
 
-require github.com/terraprovider/go-msadmin v0.2.0
+require github.com/terraprovider/go-msadmin v0.3.0
 
 require (
 	github.com/AzureAD/microsoft-authentication-library-for-go v1.7.2 // indirect

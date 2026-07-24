@@ -20,6 +20,8 @@ github.com/terraprovider/go-msadmin v0.1.0 h1:TXKBSccOPGmXyVC0Bk+MVevhaLv++VqBXI
 github.com/terraprovider/go-msadmin v0.1.0/go.mod h1:fdgNwHSBcI0NWrU8tXScSxIyKGwHFILfIJEQF9zmtKk=
 github.com/terraprovider/go-msadmin v0.2.0 h1:VlUdDWnX/Win7VvghgvH/k2wjjwhzxZCAFNi152pJhg=
 github.com/terraprovider/go-msadmin v0.2.0/go.mod h1:ZXE9dxcz1dtzsMeXJs6gVXQrWv+66vzf7OT5C+rshK0=
+github.com/terraprovider/go-msadmin v0.3.0 h1:DD6R/vMKxlTwedgqd/edX8Jz+hFiUk1Z8Kd+oWLHwZE=
+github.com/terraprovider/go-msadmin v0.3.0/go.mod h1:ZXE9dxcz1dtzsMeXJs6gVXQrWv+66vzf7OT5C+rshK0=
 github.com/xyproto/randomstring v1.0.5 h1:YtlWPoRdgMu3NZtP45drfy1GKoojuR7hmRcnhZqKjWU=
 github.com/xyproto/randomstring v1.0.5/go.mod h1:rgmS5DeNXLivK7YprL0pY+lTuhNQW3iGxZ18UQApw/E=
 golang.org/x/crypto v0.11.0 h1:6Ewdq3tDic1mg5xRO4milcWCfMVQhI4NkqWWvqejpuA=

@@ -22,6 +22,7 @@ import (
 	"sync"
 
 	"github.com/terraprovider/go-msadmin/auth"
+	"github.com/terraprovider/go-msadmin/httpx"
 	"github.com/terraprovider/go-msadmin/retry"
 )
 
@@ -109,8 +110,10 @@ func New(opt Options) (*Client, error) {
 	}
 	if opt.HTTPClient == nil {
 		// These APIs throttle with 429/Retry-After and return transient 5xx under
-		// load; default to the go-msadmin retry transport. Callers can override.
-		opt.HTTPClient = &http.Client{Transport: retry.NewTransport(nil, retry.Config{})}
+		// load; default to the go-msadmin retry transport. The debug transport under
+		// it logs the full request/response of every attempt (incl. the discovery
+		// handshake) when TF_LOG=debug — see httpx.DebugTransport. Callers can override.
+		opt.HTTPClient = &http.Client{Transport: retry.NewTransport(httpx.NewDebugTransport(nil), retry.Config{})}
 	}
 	if opt.ModuleVersion == "" {
 		opt.ModuleVersion = DefaultModuleVersion
