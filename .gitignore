@@ -1,0 +1,13 @@
+# Secrets / local env (client secret lives here)
+.env
+*.pem
+*.pfx
+
+# Live-probe / test output that may contain tenant data
+*-observed*.json
+testdata/live-*
+
+# Go build artifacts
+/gen-go
+/gen-models
+*.test

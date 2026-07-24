@@ -1,0 +1,1014 @@
+{
+  "source": "op-name + [Cmdlet]-class join, filtered to exported (decompiled) + captured",
+  "mapped": 168,
+  "cmdlets": {
+    "Complete-CsOnlineTelephoneNumberOrder": {
+      "cmdlet": "Complete-CsOnlineTelephoneNumberOrder",
+      "op": "OnlineTelephoneNumberOrderComplete",
+      "method": "POST",
+      "path": "/Skype.TelephoneNumberMgmt/cmdlet/searches/"
+    },
+    "Export-CsAcquiredPhoneNumber": {
+      "cmdlet": "Export-CsAcquiredPhoneNumber",
+      "op": "AcquiredPhoneNumberExport",
+      "method": "POST",
+      "path": "/Skype.TelephoneNumberMgmt/cmdlet/export-numbers?"
+    },
+    "Get-CsAgent": {
+      "cmdlet": "Get-CsAgent",
+      "op": "AgentGet1",
+      "method": "GET",
+      "path": "/Teams.VoiceApps/aiagents/"
+    },
+    "Get-CsAutoAttendant": {
+      "cmdlet": "Get-CsAutoAttendant",
+      "op": "AutoAttendantGet",
+      "method": "GET",
+      "path": "/Teams.VoiceApps/auto-attendants/"
+    },
+    "Get-CsAutoAttendantStatus": {
+      "cmdlet": "Get-CsAutoAttendantStatus",
+      "op": "AutoAttendantStatusGet",
+      "method": "GET",
+      "path": "/Teams.VoiceApps/auto-attendants/status/"
+    },
+    "Get-CsAutoAttendantSupportedLanguage": {
+      "cmdlet": "Get-CsAutoAttendantSupportedLanguage",
+      "op": "AutoAttendantSupportedLanguageGet",
+      "method": "GET",
+      "path": "/Teams.VoiceApps/supported-languages/"
+    },
+    "Get-CsAutoAttendantSupportedTimeZone": {
+      "cmdlet": "Get-CsAutoAttendantSupportedTimeZone",
+      "op": "AutoAttendantSupportedTimeZoneGet",
+      "method": "GET",
+      "path": "/Teams.VoiceApps/supported-timezones/"
+    },
+    "Get-CsAutoAttendantTenantInformation": {
+      "cmdlet": "Get-CsAutoAttendantTenantInformation",
+      "op": "AutoAttendantTenantInformationGet",
+      "method": "GET",
+      "path": "/Teams.VoiceApps/information"
+    },
+    "Get-CsAutoRecordingTemplate": {
+      "cmdlet": "Get-CsAutoRecordingTemplate",
+      "op": "AutoRecordingTemplateGet1",
+      "method": "GET",
+      "path": "/Teams.VoiceApps/auto-recording/"
+    },
+    "Get-CsBatchPolicyAssignmentOperation": {
+      "cmdlet": "Get-CsBatchPolicyAssignmentOperation",
+      "op": "BatchGetPolicyAssignmentOperation",
+      "method": "GET",
+      "path": "/Skype.Policy/assignments/operations?"
+    },
+    "Get-CsBatchTeamsDeploymentStatus": {
+      "cmdlet": "Get-CsBatchTeamsDeploymentStatus",
+      "op": "BatchTeamsDeploymentStatusGet",
+      "method": "GET",
+      "path": "/Teams.FLWOrchestrator/orchestration/v1.0/scenarios/"
+    },
+    "Get-CsCallQueue": {
+      "cmdlet": "Get-CsCallQueue",
+      "op": "CallQueueGet1",
+      "method": "GET",
+      "path": "/Teams.VoiceApps/callqueues/"
+    },
+    "Get-CsCloudCallDataConnection": {
+      "cmdlet": "Get-CsCloudCallDataConnection",
+      "op": "(captured)",
+      "method": "GET",
+      "path": "/Teams.InternalSupport/CloudCallDataConnection"
+    },
+    "Get-CsComplianceRecordingForCallQueueTemplate": {
+      "cmdlet": "Get-CsComplianceRecordingForCallQueueTemplate",
+      "op": "ComplianceRecordingForCallQueueTemplateGet1",
+      "method": "GET",
+      "path": "/Teams.VoiceApps/compliance-recording/"
+    },
+    "Get-CsExportAcquiredPhoneNumberStatus": {
+      "cmdlet": "Get-CsExportAcquiredPhoneNumberStatus",
+      "op": "ExportAcquiredPhoneNumberStatusGet",
+      "method": "GET",
+      "path": "/Skype.TelephoneNumberMgmt/cmdlet/export-numbers/"
+    },
+    "Get-CsGroupPolicyAssignment": {
+      "cmdlet": "Get-CsGroupPolicyAssignment",
+      "op": "GroupGetPolicyAssignment",
+      "method": "GET",
+      "path": "/Skype.Policy/groupPolicyAssignments/"
+    },
+    "Get-CsHybridTelephoneNumber": {
+      "cmdlet": "Get-CsHybridTelephoneNumber",
+      "op": "HybridTelephoneNumberGet",
+      "method": "GET",
+      "path": "/Teams.Cpc/hybridTelephoneNumbers/"
+    },
+    "Get-CsMainlineAttendantAppointmentBookingFlow": {
+      "cmdlet": "Get-CsMainlineAttendantAppointmentBookingFlow",
+      "op": "MainlineAttendantAppointmentBookingFlowGet1",
+      "method": "GET",
+      "path": "/Teams.VoiceApps/mainline-attendant-flow/appointment-booking/"
+    },
+    "Get-CsMainlineAttendantFlow": {
+      "cmdlet": "Get-CsMainlineAttendantFlow",
+      "op": "MainlineAttendantFlowGet",
+      "method": "GET",
+      "path": "/Teams.VoiceApps/mainline-attendant-flow/"
+    },
+    "Get-CsMainlineAttendantQuestionAnswerFlow": {
+      "cmdlet": "Get-CsMainlineAttendantQuestionAnswerFlow",
+      "op": "MainlineAttendantQuestionAnswerFlowGet1",
+      "method": "GET",
+      "path": "/Teams.VoiceApps/mainline-attendant-flow/question-answer/"
+    },
+    "Get-CsMainlineAttendantSupportedLanguages": {
+      "cmdlet": "Get-CsMainlineAttendantSupportedLanguages",
+      "op": "(captured)",
+      "method": "GET",
+      "path": "/Teams.VoiceApps/information"
+    },
+    "Get-CsMainlineAttendantSupportedVoices": {
+      "cmdlet": "Get-CsMainlineAttendantSupportedVoices",
+      "op": "(captured)",
+      "method": "GET",
+      "path": "/Teams.VoiceApps/information"
+    },
+    "Get-CsMainlineAttendantTenantInformation": {
+      "cmdlet": "Get-CsMainlineAttendantTenantInformation",
+      "op": "(captured)",
+      "method": "GET",
+      "path": "/Teams.VoiceApps/information"
+    },
+    "Get-CsMeetingMigrationStatus": {
+      "cmdlet": "Get-CsMeetingMigrationStatus",
+      "op": "(captured)",
+      "method": "GET",
+      "path": "/Teams.Mms/GetMeetingMigrationStatus"
+    },
+    "Get-CsOnlineApplicationInstance": {
+      "cmdlet": "Get-CsOnlineApplicationInstance",
+      "op": "(captured)",
+      "method": "GET",
+      "path": "/Teams.PlatformService/v2/Legacy/ApplicationInstances"
+    },
+    "Get-CsOnlineApplicationInstanceAssociation": {
+      "cmdlet": "Get-CsOnlineApplicationInstanceAssociation",
+      "op": "OnlineApplicationInstanceAssociationGet",
+      "method": "GET",
+      "path": "/Teams.VoiceApps/applicationinstanceassociations/"
+    },
+    "Get-CsOnlineApplicationInstanceAssociationStatus": {
+      "cmdlet": "Get-CsOnlineApplicationInstanceAssociationStatus",
+      "op": "OnlineApplicationInstanceAssociationStatusGet",
+      "method": "GET",
+      "path": "/Teams.VoiceApps/applicationinstanceassociations/"
+    },
+    "Get-CsOnlineAudioFile": {
+      "cmdlet": "Get-CsOnlineAudioFile",
+      "op": "OnlineAudioFileGet1",
+      "method": "GET",
+      "path": "/Teams.MediaStorage/audiofile/"
+    },
+    "Get-CsOnlineDialInConferencingUser": {
+      "cmdlet": "Get-CsOnlineDialInConferencingUser",
+      "op": "(captured)",
+      "method": "GET",
+      "path": "/Teams.Cpc/users"
+    },
+    "Get-CsOnlineDialinConferencingBridge": {
+      "cmdlet": "Get-CsOnlineDialinConferencingBridge",
+      "op": "OdcBridgeGet",
+      "method": "GET",
+      "path": "/Teams.Cpc/bridges/"
+    },
+    "Get-CsOnlineDialinConferencingLanguagesSupported": {
+      "cmdlet": "Get-CsOnlineDialinConferencingLanguagesSupported",
+      "op": "OdcLanguagesSupportedGet",
+      "method": "GET",
+      "path": "/Teams.Cpc/languagesSupported"
+    },
+    "Get-CsOnlineEnhancedEmergencyServiceDisclaimer": {
+      "cmdlet": "Get-CsOnlineEnhancedEmergencyServiceDisclaimer",
+      "op": "OnlineEnhancedEmergencyServiceDisclaimerGet",
+      "method": "GET",
+      "path": "/Skype.Ncs/EmergencyDisclaimer/response/Country="
+    },
+    "Get-CsOnlineLisCivicAddress": {
+      "cmdlet": "Get-CsOnlineLisCivicAddress",
+      "op": "OnlineLisCivicAddressGet",
+      "method": "GET",
+      "path": "/Skype.Ncs/CivicAddresses"
+    },
+    "Get-CsOnlineLisPort": {
+      "cmdlet": "Get-CsOnlineLisPort",
+      "op": "(captured)",
+      "method": "GET",
+      "path": "/Skype.Ncs/ports"
+    },
+    "Get-CsOnlineLisSubnet": {
+      "cmdlet": "Get-CsOnlineLisSubnet",
+      "op": "(captured)",
+      "method": "GET",
+      "path": "/Skype.Ncs/subnets"
+    },
+    "Get-CsOnlineLisSwitch": {
+      "cmdlet": "Get-CsOnlineLisSwitch",
+      "op": "(captured)",
+      "method": "GET",
+      "path": "/Skype.Ncs/switches"
+    },
+    "Get-CsOnlineLisWirelessAccessPoint": {
+      "cmdlet": "Get-CsOnlineLisWirelessAccessPoint",
+      "op": "(captured)",
+      "method": "GET",
+      "path": "/Skype.Ncs/wirelessAccessPoints"
+    },
+    "Get-CsOnlineSchedule": {
+      "cmdlet": "Get-CsOnlineSchedule",
+      "op": "OnlineScheduleGet1",
+      "method": "GET",
+      "path": "/Teams.VoiceApps/schedules/"
+    },
+    "Get-CsOnlineSipDomain": {
+      "cmdlet": "Get-CsOnlineSipDomain",
+      "op": "(captured)",
+      "method": "GET",
+      "path": "/Teams.Tenant/VerifiedSipDomains"
+    },
+    "Get-CsOnlineTelephoneNumberCountry": {
+      "cmdlet": "Get-CsOnlineTelephoneNumberCountry",
+      "op": "OnlineTelephoneNumberCountriesGet",
+      "method": "GET",
+      "path": "/Skype.TelephoneNumberMgmt/cmdlet/searchcountries"
+    },
+    "Get-CsOnlineTelephoneNumberOrder": {
+      "cmdlet": "Get-CsOnlineTelephoneNumberOrder",
+      "op": "OnlineTelephoneNumberOrderGet",
+      "method": "GET",
+      "path": "/Skype.TelephoneNumberMgmt/cmdlet/orders?"
+    },
+    "Get-CsOnlineTelephoneNumberType": {
+      "cmdlet": "Get-CsOnlineTelephoneNumberType",
+      "op": "OnlineTelephoneNumberTypesGet",
+      "method": "GET",
+      "path": "/Skype.TelephoneNumberMgmt/cmdlet/searchplans/"
+    },
+    "Get-CsOnlineUser": {
+      "cmdlet": "Get-CsOnlineUser",
+      "op": "(captured)",
+      "method": "GET",
+      "path": "/Teams.User/users"
+    },
+    "Get-CsOnlineVoiceUser": {
+      "cmdlet": "Get-CsOnlineVoiceUser",
+      "op": "(captured)",
+      "method": "GET",
+      "path": "/Teams.User/users"
+    },
+    "Get-CsPersonalAttendantSettings": {
+      "cmdlet": "Get-CsPersonalAttendantSettings",
+      "op": "PersonalAttendantSettingsGet",
+      "method": "GET",
+      "path": "/Skype.VoiceGroup/personalAttendantSettings/"
+    },
+    "Get-CsPhoneNumberAssignment": {
+      "cmdlet": "Get-CsPhoneNumberAssignment",
+      "op": "(captured)",
+      "method": "GET",
+      "path": "/Skype.TelephoneNumberMgmt/cmdlet/assignments"
+    },
+    "Get-CsPhoneNumberPolicyAssignment": {
+      "cmdlet": "Get-CsPhoneNumberPolicyAssignment",
+      "op": "(captured)",
+      "method": "GET",
+      "path": "/Skype.TelephoneNumberMgmt/cmdlet/phone-number-policy-assignments"
+    },
+    "Get-CsPhoneNumberTag": {
+      "cmdlet": "Get-CsPhoneNumberTag",
+      "op": "PhoneNumberTagGet",
+      "method": "GET",
+      "path": "/Skype.TelephoneNumberMgmt/cmdlet/phone-number-tag"
+    },
+    "Get-CsPhoneNumberTenantConfiguration": {
+      "cmdlet": "Get-CsPhoneNumberTenantConfiguration",
+      "op": "PhoneNumberTenantConfigurationGet",
+      "method": "GET",
+      "path": "/Skype.TelephoneNumberMgmt/cmdlet/tenant-default-config"
+    },
+    "Get-CsPolicyPackage": {
+      "cmdlet": "Get-CsPolicyPackage",
+      "op": "PolicyPackageGet",
+      "method": "GET",
+      "path": "/Teams.VerticalPackaging/package"
+    },
+    "Get-CsSdgBulkSignInRequestStatus": {
+      "cmdlet": "Get-CsSdgBulkSignInRequestStatus",
+      "op": "SdgBulkSignInRequestStatusGet",
+      "method": "GET",
+      "path": "/Teams.SipDevicesGatewayManagement/v1/batchstatus?batchid="
+    },
+    "Get-CsSdgBulkSignInRequestsSummary": {
+      "cmdlet": "Get-CsSdgBulkSignInRequestsSummary",
+      "op": "SdgBulkSignInRequestsSummaryGet",
+      "method": "GET",
+      "path": "/Teams.SipDevicesGatewayManagement/v1/batchsummaries"
+    },
+    "Get-CsSharedCallHistoryTemplate": {
+      "cmdlet": "Get-CsSharedCallHistoryTemplate",
+      "op": "SharedCallQueueHistoryTemplateGet1",
+      "method": "GET",
+      "path": "/Teams.VoiceApps/shared-call-history-template/"
+    },
+    "Get-CsSharedCallQueueHistoryTemplate": {
+      "cmdlet": "Get-CsSharedCallQueueHistoryTemplate",
+      "op": "SharedCallQueueHistoryTemplateGet1",
+      "method": "GET",
+      "path": "/Teams.VoiceApps/shared-call-history-template/"
+    },
+    "Get-CsSharedVoicemailTriageSettingsTemplate": {
+      "cmdlet": "Get-CsSharedVoicemailTriageSettingsTemplate",
+      "op": "SharedVoicemailTriageSettingsTemplateGet1",
+      "method": "GET",
+      "path": "/Teams.VoiceApps/shared-voicemail-triage-settings/"
+    },
+    "Get-CsTagsTemplate": {
+      "cmdlet": "Get-CsTagsTemplate",
+      "op": "TagsTemplateGet1",
+      "method": "GET",
+      "path": "/Teams.VoiceApps/ivr-tags-template/"
+    },
+    "Get-CsTeamTemplate": {
+      "cmdlet": "Get-CsTeamTemplate",
+      "op": "TeamTemplateGet",
+      "method": "GET",
+      "path": "/Teams.Templates/"
+    },
+    "Get-CsTeamTemplateList": {
+      "cmdlet": "Get-CsTeamTemplateList",
+      "op": "TeamTemplateGetList",
+      "method": "GET",
+      "path": "/Teams.Templates/api/TeamTemplates/v1.0/"
+    },
+    "Get-CsTeamsSettingsCustomApp": {
+      "cmdlet": "Get-CsTeamsSettingsCustomApp",
+      "op": "TeamsSettingsCustomAppGet",
+      "method": "GET",
+      "path": "/Teams.MiddletierService/tenantWideAppsSettingsGlobal"
+    },
+    "Get-CsTeamsShiftsConnection": {
+      "cmdlet": "Get-CsTeamsShiftsConnection",
+      "op": "TeamsGetShiftsConnection",
+      "method": "GET",
+      "path": "/Teams.ShiftsConnector/api/v2/connections"
+    },
+    "Get-CsTeamsShiftsConnectionConnector": {
+      "cmdlet": "Get-CsTeamsShiftsConnectionConnector",
+      "op": "TeamsGetShiftsConnectionsConnectors",
+      "method": "GET",
+      "path": "/Teams.ShiftsConnector/api/v2/connectors"
+    },
+    "Get-CsTeamsShiftsConnectionErrorReport": {
+      "cmdlet": "Get-CsTeamsShiftsConnectionErrorReport",
+      "op": "TeamsGetShiftsConnectionsErrorReport1",
+      "method": "GET",
+      "path": "/Teams.ShiftsConnector/api/v2/reports/errors/"
+    },
+    "Get-CsTeamsShiftsConnectionInstance": {
+      "cmdlet": "Get-CsTeamsShiftsConnectionInstance",
+      "op": "TeamsGetShiftsConnectionsInstance",
+      "method": "GET",
+      "path": "/Teams.ShiftsConnector/api/v2/connectorinstances"
+    },
+    "Get-CsTeamsShiftsConnectionOperation": {
+      "cmdlet": "Get-CsTeamsShiftsConnectionOperation",
+      "op": "TeamsGetShiftsConnectionOperation",
+      "method": "GET",
+      "path": "/Teams.ShiftsConnector/api/v1/operations/"
+    },
+    "Get-CsTeamsShiftsConnectionSyncResult": {
+      "cmdlet": "Get-CsTeamsShiftsConnectionSyncResult",
+      "op": "TeamsGetShiftsConnectionsSyncResults",
+      "method": "GET",
+      "path": "/Teams.ShiftsConnector/api/v1/connectorinstances/"
+    },
+    "Get-CsTeamsShiftsConnectionTeamMap": {
+      "cmdlet": "Get-CsTeamsShiftsConnectionTeamMap",
+      "op": "TeamsGetShiftsConnectionsTeamMap",
+      "method": "GET",
+      "path": "/Teams.ShiftsConnector/api/v1/connectorinstances/"
+    },
+    "Get-CsTeamsShiftsConnectionWfmTeam": {
+      "cmdlet": "Get-CsTeamsShiftsConnectionWfmTeam",
+      "op": "TeamsGetShiftsConnectionsWfmTeam",
+      "method": "GET",
+      "path": "/Teams.ShiftsConnector/api/v1/connectorinstances/"
+    },
+    "Get-CsTeamsShiftsConnectionWfmUser": {
+      "cmdlet": "Get-CsTeamsShiftsConnectionWfmUser",
+      "op": "TeamsGetShiftsConnectionsWfmUsers",
+      "method": "GET",
+      "path": "/Teams.ShiftsConnector/api/v1/connectorinstances/"
+    },
+    "Get-CsTenant": {
+      "cmdlet": "Get-CsTenant",
+      "op": "(captured)",
+      "method": "GET",
+      "path": "/Teams.Tenant/tenants"
+    },
+    "Get-CsUserCallingSettings": {
+      "cmdlet": "Get-CsUserCallingSettings",
+      "op": "UserCallingSettingsGet",
+      "method": "GET",
+      "path": "/Skype.VoiceGroup/userRoutingSettings/"
+    },
+    "Get-CsUserPolicyAssignment": {
+      "cmdlet": "Get-CsUserPolicyAssignment",
+      "op": "UserGetPolicyAssignment",
+      "method": "GET",
+      "path": "/Skype.User/users/"
+    },
+    "Get-CsUserPolicyPackage": {
+      "cmdlet": "Get-CsUserPolicyPackage",
+      "op": "UserPolicyPackageGet",
+      "method": "GET",
+      "path": "/Teams.VerticalPackaging/package/assigned"
+    },
+    "Get-CsUserPolicyPackageRecommendation": {
+      "cmdlet": "Get-CsUserPolicyPackageRecommendation",
+      "op": "UserPolicyPackageGetRecommendation",
+      "method": "GET",
+      "path": "/Teams.VerticalPackaging/package"
+    },
+    "Grant-CsUserPolicyPackage": {
+      "cmdlet": "Grant-CsUserPolicyPackage",
+      "op": "UserPolicyPackageGrant",
+      "method": "POST",
+      "path": "/Teams.VerticalPackaging/package/batch"
+    },
+    "Import-CsAutoAttendantHolidays": {
+      "cmdlet": "Import-CsAutoAttendantHolidays",
+      "op": "AutoAttendantHolidaysImport",
+      "method": "PUT",
+      "path": "/Teams.VoiceApps/auto-attendants/"
+    },
+    "Import-CsOnlineAudioFile": {
+      "cmdlet": "Import-CsOnlineAudioFile",
+      "op": "OnlineAudioFileImport",
+      "method": "POST",
+      "path": "/Teams.MediaStorage/audiofile"
+    },
+    "New-CsAgent": {
+      "cmdlet": "New-CsAgent",
+      "op": "AgentNew",
+      "method": "POST",
+      "path": "/Teams.VoiceApps/aiagents"
+    },
+    "New-CsAutoAttendant": {
+      "cmdlet": "New-CsAutoAttendant",
+      "op": "AutoAttendantNew",
+      "method": "POST",
+      "path": "/Teams.VoiceApps/auto-attendants"
+    },
+    "New-CsAutoAttendantCallFlow": {
+      "cmdlet": "New-CsAutoAttendantCallFlow",
+      "op": "AutoAttendantCallFlowNew",
+      "method": "POST",
+      "path": "/Teams.VoiceApps/auto-attendants/call-flows/draft"
+    },
+    "New-CsAutoAttendantCallHandlingAssociation": {
+      "cmdlet": "New-CsAutoAttendantCallHandlingAssociation",
+      "op": "AutoAttendantCallHandlingAssociationNew",
+      "method": "POST",
+      "path": "/Teams.VoiceApps/auto-attendants/call-handling-associations/draft"
+    },
+    "New-CsAutoAttendantCallableEntity": {
+      "cmdlet": "New-CsAutoAttendantCallableEntity",
+      "op": "AutoAttendantCallableEntityNew",
+      "method": "POST",
+      "path": "/Teams.VoiceApps/auto-attendants/callable-entities/draft"
+    },
+    "New-CsAutoAttendantDialScope": {
+      "cmdlet": "New-CsAutoAttendantDialScope",
+      "op": "AutoAttendantDialScopeNew",
+      "method": "POST",
+      "path": "/Teams.VoiceApps/auto-attendants/group-dial-scopes/draft"
+    },
+    "New-CsAutoAttendantMenu": {
+      "cmdlet": "New-CsAutoAttendantMenu",
+      "op": "AutoAttendantMenuNew",
+      "method": "POST",
+      "path": "/Teams.VoiceApps/auto-attendants/menus/draft"
+    },
+    "New-CsAutoAttendantMenuOption": {
+      "cmdlet": "New-CsAutoAttendantMenuOption",
+      "op": "AutoAttendantMenuOptionNew",
+      "method": "POST",
+      "path": "/Teams.VoiceApps/auto-attendants/menus/menu-options/draft"
+    },
+    "New-CsAutoAttendantPrompt": {
+      "cmdlet": "New-CsAutoAttendantPrompt",
+      "op": "AutoAttendantPromptNew",
+      "method": "POST",
+      "path": "/Teams.VoiceApps/auto-attendants/prompts/draft"
+    },
+    "New-CsAutoRecordingTemplate": {
+      "cmdlet": "New-CsAutoRecordingTemplate",
+      "op": "AutoRecordingTemplateNew",
+      "method": "POST",
+      "path": "/Teams.VoiceApps/auto-recording"
+    },
+    "New-CsBatchTeamsDeployment": {
+      "cmdlet": "New-CsBatchTeamsDeployment",
+      "op": "BatchTeamsDeploymentNew",
+      "method": "POST",
+      "path": "/Teams.FLWOrchestrator/orchestration/v1.0/batchflwdeployment"
+    },
+    "New-CsCallQueue": {
+      "cmdlet": "New-CsCallQueue",
+      "op": "CallQueueNew",
+      "method": "POST",
+      "path": "/Teams.VoiceApps/callqueues?"
+    },
+    "New-CsComplianceRecordingForCallQueueTemplate": {
+      "cmdlet": "New-CsComplianceRecordingForCallQueueTemplate",
+      "op": "ComplianceRecordingForCallQueueTemplateNew",
+      "method": "POST",
+      "path": "/Teams.VoiceApps/compliance-recording"
+    },
+    "New-CsCustomPolicyPackage": {
+      "cmdlet": "New-CsCustomPolicyPackage",
+      "op": "CustomPolicyPackageNew",
+      "method": "POST",
+      "path": "/Teams.VerticalPackaging/package/custompackage"
+    },
+    "New-CsHybridTelephoneNumber": {
+      "cmdlet": "New-CsHybridTelephoneNumber",
+      "op": "HybridTelephoneNumberNew",
+      "method": "POST",
+      "path": "/Teams.Cpc/hybridTelephoneNumbers/"
+    },
+    "New-CsMainlineAttendantAppointmentBookingFlow": {
+      "cmdlet": "New-CsMainlineAttendantAppointmentBookingFlow",
+      "op": "MainlineAttendantAppointmentBookingFlowNew",
+      "method": "POST",
+      "path": "/Teams.VoiceApps/mainline-attendant-flow/appointment-booking"
+    },
+    "New-CsMainlineAttendantQuestionAnswerFlow": {
+      "cmdlet": "New-CsMainlineAttendantQuestionAnswerFlow",
+      "op": "MainlineAttendantQuestionAnswerFlowNew",
+      "method": "POST",
+      "path": "/Teams.VoiceApps/mainline-attendant-flow/question-answer"
+    },
+    "New-CsOnlineApplicationInstanceAssociation": {
+      "cmdlet": "New-CsOnlineApplicationInstanceAssociation",
+      "op": "OnlineApplicationInstanceAssociationNew",
+      "method": "POST",
+      "path": "/Teams.VoiceApps/applicationinstanceassociations"
+    },
+    "New-CsOnlineDateTimeRange": {
+      "cmdlet": "New-CsOnlineDateTimeRange",
+      "op": "OnlineDateTimeRangeNew",
+      "method": "POST",
+      "path": "/Teams.VoiceApps/schedules/schedules/date-time-ranges/draft"
+    },
+    "New-CsOnlineDirectRoutingTelephoneNumberUploadOrder": {
+      "cmdlet": "New-CsOnlineDirectRoutingTelephoneNumberUploadOrder",
+      "op": "OnlineDirectRoutingTelephoneNumberUploadOrderNew",
+      "method": "POST",
+      "path": "/Skype.TelephoneNumberMgmt/cmdlet/direct-routing-telephone-number-orders"
+    },
+    "New-CsOnlineSchedule": {
+      "cmdlet": "New-CsOnlineSchedule",
+      "op": "OnlineScheduleNew",
+      "method": "POST",
+      "path": "/Teams.VoiceApps/schedules"
+    },
+    "New-CsOnlineTelephoneNumberOrder": {
+      "cmdlet": "New-CsOnlineTelephoneNumberOrder",
+      "op": "OnlineTelephoneNumberOrderCreate",
+      "method": "POST",
+      "path": "/Skype.TelephoneNumberMgmt/cmdlet/searches"
+    },
+    "New-CsOnlineTelephoneNumberReleaseOrder": {
+      "cmdlet": "New-CsOnlineTelephoneNumberReleaseOrder",
+      "op": "OnlineTelephoneNumberReleaseOrderNew",
+      "method": "POST",
+      "path": "/Skype.TelephoneNumberMgmt/cmdlet/release-by-input-type"
+    },
+    "New-CsOnlineTimeRange": {
+      "cmdlet": "New-CsOnlineTimeRange",
+      "op": "OnlineTimeRangeNew",
+      "method": "POST",
+      "path": "/Teams.VoiceApps/schedules/schedules/time-ranges/draft"
+    },
+    "New-CsPhoneNumberBulkUpdateDrNumberAcquiredCapabilitiesOrder": {
+      "cmdlet": "New-CsPhoneNumberBulkUpdateDrNumberAcquiredCapabilitiesOrder",
+      "op": "PhoneNumberBulkUpdateDrNumberAcquiredCapabilitiesOrderNew",
+      "method": "POST",
+      "path": "/Skype.TelephoneNumberMgmt/cmdlet/bulk-update-DrNumberAcquiredCapabilities-order"
+    },
+    "New-CsPhoneNumberBulkUpdateLocationIdOrder": {
+      "cmdlet": "New-CsPhoneNumberBulkUpdateLocationIdOrder",
+      "op": "PhoneNumberBulkUpdateLocationIdOrderNew",
+      "method": "POST",
+      "path": "/Skype.TelephoneNumberMgmt/cmdlet/bulk-update-LocationId-order"
+    },
+    "New-CsPhoneNumberBulkUpdateNetworkSiteIdOrder": {
+      "cmdlet": "New-CsPhoneNumberBulkUpdateNetworkSiteIdOrder",
+      "op": "PhoneNumberBulkUpdateNetworkSiteIdOrderNew",
+      "method": "POST",
+      "path": "/Skype.TelephoneNumberMgmt/cmdlet/bulk-update-NetworkSiteId-order"
+    },
+    "New-CsPhoneNumberBulkUpdateReverseNumberLookupOrder": {
+      "cmdlet": "New-CsPhoneNumberBulkUpdateReverseNumberLookupOrder",
+      "op": "PhoneNumberBulkUpdateReverseNumberLookupOrderNew",
+      "method": "POST",
+      "path": "/Skype.TelephoneNumberMgmt/cmdlet/bulk-update-ReverseNumberLookup-order"
+    },
+    "New-CsPhoneNumberBulkUpdateTagsOrder": {
+      "cmdlet": "New-CsPhoneNumberBulkUpdateTagsOrder",
+      "op": "PhoneNumberBulkUpdateTagsOrderNew",
+      "method": "POST",
+      "path": "/Skype.TelephoneNumberMgmt/cmdlet/bulk-update-tags-order"
+    },
+    "New-CsSdgBulkSignInRequest": {
+      "cmdlet": "New-CsSdgBulkSignInRequest",
+      "op": "SdgBulkSignInRequestNew",
+      "method": "POST",
+      "path": "/Teams.SipDevicesGatewayManagement/v1/createbatch?TargetRegion="
+    },
+    "New-CsSharedCallQueueHistoryTemplate": {
+      "cmdlet": "New-CsSharedCallQueueHistoryTemplate",
+      "op": "SharedCallQueueHistoryTemplateNew",
+      "method": "POST",
+      "path": "/Teams.VoiceApps/shared-call-history-template"
+    },
+    "New-CsSharedVoicemailTriageSettingsTemplate": {
+      "cmdlet": "New-CsSharedVoicemailTriageSettingsTemplate",
+      "op": "SharedVoicemailTriageSettingsTemplateNew",
+      "method": "POST",
+      "path": "/Teams.VoiceApps/shared-voicemail-triage-settings"
+    },
+    "New-CsTag": {
+      "cmdlet": "New-CsTag",
+      "op": "TagNew",
+      "method": "POST",
+      "path": "/Teams.VoiceApps/ivr-tags-template/ivr-tag/draft"
+    },
+    "New-CsTagsTemplate": {
+      "cmdlet": "New-CsTagsTemplate",
+      "op": "TagsTemplateNew",
+      "method": "POST",
+      "path": "/Teams.VoiceApps/ivr-tags-template"
+    },
+    "New-CsTeamTemplate": {
+      "cmdlet": "New-CsTeamTemplate",
+      "op": "TeamTemplateNew",
+      "method": "POST",
+      "path": "/Teams.Templates/api/TeamTemplates/v1.0/Tenant/"
+    },
+    "New-CsTeamsShiftsConnectionBatchTeamMap": {
+      "cmdlet": "New-CsTeamsShiftsConnectionBatchTeamMap",
+      "op": "TeamsCreateShiftsConnectionBatchTeamMap",
+      "method": "PUT",
+      "path": "/Teams.ShiftsConnector/api/v1/connectorinstances/"
+    },
+    "Remove-CsAgent": {
+      "cmdlet": "Remove-CsAgent",
+      "op": "AgentRemove",
+      "method": "DELETE",
+      "path": "/Teams.VoiceApps/aiagents/"
+    },
+    "Remove-CsAutoAttendant": {
+      "cmdlet": "Remove-CsAutoAttendant",
+      "op": "AutoAttendantRemove",
+      "method": "DELETE",
+      "path": "/Teams.VoiceApps/auto-attendants/"
+    },
+    "Remove-CsAutoRecordingTemplate": {
+      "cmdlet": "Remove-CsAutoRecordingTemplate",
+      "op": "AutoRecordingTemplateRemove",
+      "method": "DELETE",
+      "path": "/Teams.VoiceApps/auto-recording/"
+    },
+    "Remove-CsCallQueue": {
+      "cmdlet": "Remove-CsCallQueue",
+      "op": "CallQueueRemove",
+      "method": "DELETE",
+      "path": "/Teams.VoiceApps/callqueues/"
+    },
+    "Remove-CsComplianceRecordingForCallQueueTemplate": {
+      "cmdlet": "Remove-CsComplianceRecordingForCallQueueTemplate",
+      "op": "ComplianceRecordingForCallQueueTemplateRemove",
+      "method": "DELETE",
+      "path": "/Teams.VoiceApps/compliance-recording/"
+    },
+    "Remove-CsCustomPolicyPackage": {
+      "cmdlet": "Remove-CsCustomPolicyPackage",
+      "op": "CustomPolicyPackageRemove",
+      "method": "DELETE",
+      "path": "/Teams.VerticalPackaging/package/custompackage/"
+    },
+    "Remove-CsGroupPolicyAssignment": {
+      "cmdlet": "Remove-CsGroupPolicyAssignment",
+      "op": "GroupRemovePolicyAssignment",
+      "method": "DELETE",
+      "path": "/Skype.Policy/groupPolicyAssignments/"
+    },
+    "Remove-CsHybridTelephoneNumber": {
+      "cmdlet": "Remove-CsHybridTelephoneNumber",
+      "op": "HybridTelephoneNumberRemove",
+      "method": "DELETE",
+      "path": "/Teams.Cpc/hybridTelephoneNumbers/"
+    },
+    "Remove-CsMainlineAttendantAppointmentBookingFlow": {
+      "cmdlet": "Remove-CsMainlineAttendantAppointmentBookingFlow",
+      "op": "MainlineAttendantAppointmentBookingFlowRemove",
+      "method": "DELETE",
+      "path": "/Teams.VoiceApps/mainline-attendant-flow/appointment-booking/"
+    },
+    "Remove-CsMainlineAttendantQuestionAnswerFlow": {
+      "cmdlet": "Remove-CsMainlineAttendantQuestionAnswerFlow",
+      "op": "MainlineAttendantQuestionAnswerFlowRemove",
+      "method": "DELETE",
+      "path": "/Teams.VoiceApps/mainline-attendant-flow/question-answer/"
+    },
+    "Remove-CsOnlineApplicationInstanceAssociation": {
+      "cmdlet": "Remove-CsOnlineApplicationInstanceAssociation",
+      "op": "OnlineApplicationInstanceAssociationRemove",
+      "method": "DELETE",
+      "path": "/Teams.VoiceApps/applicationinstanceassociations/"
+    },
+    "Remove-CsOnlineAudioFile": {
+      "cmdlet": "Remove-CsOnlineAudioFile",
+      "op": "OnlineAudioFileRemove",
+      "method": "DELETE",
+      "path": "/Teams.MediaStorage/audiofile/"
+    },
+    "Remove-CsOnlineSchedule": {
+      "cmdlet": "Remove-CsOnlineSchedule",
+      "op": "OnlineScheduleRemove",
+      "method": "DELETE",
+      "path": "/Teams.VoiceApps/schedules/"
+    },
+    "Remove-CsPhoneNumberAssignmentBlock": {
+      "cmdlet": "Remove-CsPhoneNumberAssignmentBlock",
+      "op": "PhoneNumberAssignmentBlockRemove",
+      "method": "DELETE",
+      "path": "/Skype.TelephoneNumberMgmt/cmdlet/number-assignment-block?telephoneNumber="
+    },
+    "Remove-CsPhoneNumberSmsActivation": {
+      "cmdlet": "Remove-CsPhoneNumberSmsActivation",
+      "op": "PhoneNumberSmsActivationRemove",
+      "method": "POST",
+      "path": "/Skype.TelephoneNumberMgmt/cmdlet/deactivate-sms"
+    },
+    "Remove-CsPhoneNumberTag": {
+      "cmdlet": "Remove-CsPhoneNumberTag",
+      "op": "PhoneNumberTagRemove",
+      "method": "DELETE",
+      "path": "/Skype.TelephoneNumberMgmt/cmdlet/phone-number-tag?tag="
+    },
+    "Remove-CsSharedCallHistoryTemplate": {
+      "cmdlet": "Remove-CsSharedCallHistoryTemplate",
+      "op": "SharedCallQueueHistoryTemplateRemove",
+      "method": "DELETE",
+      "path": "/Teams.VoiceApps/shared-call-history-template/"
+    },
+    "Remove-CsSharedCallQueueHistoryTemplate": {
+      "cmdlet": "Remove-CsSharedCallQueueHistoryTemplate",
+      "op": "SharedCallQueueHistoryTemplateRemove",
+      "method": "DELETE",
+      "path": "/Teams.VoiceApps/shared-call-history-template/"
+    },
+    "Remove-CsSharedVoicemailTriageSettingsTemplate": {
+      "cmdlet": "Remove-CsSharedVoicemailTriageSettingsTemplate",
+      "op": "SharedVoicemailTriageSettingsTemplateRemove",
+      "method": "DELETE",
+      "path": "/Teams.VoiceApps/shared-voicemail-triage-settings/"
+    },
+    "Remove-CsTagsTemplate": {
+      "cmdlet": "Remove-CsTagsTemplate",
+      "op": "TagsTemplateRemove",
+      "method": "DELETE",
+      "path": "/Teams.VoiceApps/ivr-tags-template/"
+    },
+    "Remove-CsTeamTemplate": {
+      "cmdlet": "Remove-CsTeamTemplate",
+      "op": "TeamTemplateDelete",
+      "method": "DELETE",
+      "path": "/Teams.Templates/"
+    },
+    "Remove-CsTeamsShiftsConnection": {
+      "cmdlet": "Remove-CsTeamsShiftsConnection",
+      "op": "TeamsRemoveShiftsConnections",
+      "method": "DELETE",
+      "path": "/Teams.ShiftsConnector/api/v2/connections/"
+    },
+    "Remove-CsTeamsShiftsConnectionInstance": {
+      "cmdlet": "Remove-CsTeamsShiftsConnectionInstance",
+      "op": "TeamsRemoveShiftsConnectionsInstance",
+      "method": "DELETE",
+      "path": "/Teams.ShiftsConnector/api/v2/connectorinstances/"
+    },
+    "Remove-CsTeamsShiftsConnectionTeamMap": {
+      "cmdlet": "Remove-CsTeamsShiftsConnectionTeamMap",
+      "op": "TeamsRemoveShiftsConnectionsTeamMap",
+      "method": "DELETE",
+      "path": "/Teams.ShiftsConnector/api/v1/connectorinstances/"
+    },
+    "Remove-CsTeamsShiftsScheduleRecord": {
+      "cmdlet": "Remove-CsTeamsShiftsScheduleRecord",
+      "op": "TeamsRemoveShiftsScheduleRecord",
+      "method": "POST",
+      "path": "/Teams.ShiftsConnector/api/v1/clearschedule/clear"
+    },
+    "Remove-CsUserCallingDelegate": {
+      "cmdlet": "Remove-CsUserCallingDelegate",
+      "op": "UserCallingDelegateRemove",
+      "method": "DELETE",
+      "path": "/Skype.VoiceGroup/sharedLine/"
+    },
+    "Remove-CsUserLicenseGracePeriod": {
+      "cmdlet": "Remove-CsUserLicenseGracePeriod",
+      "op": "UserRemoveLicenseGracePeriod",
+      "method": "PATCH",
+      "path": "/Teams.User/users/"
+    },
+    "Set-CsAgent": {
+      "cmdlet": "Set-CsAgent",
+      "op": "AgentSet",
+      "method": "PUT",
+      "path": "/Teams.VoiceApps/aiagents/"
+    },
+    "Set-CsAutoAttendant": {
+      "cmdlet": "Set-CsAutoAttendant",
+      "op": "AutoAttendantSet",
+      "method": "PUT",
+      "path": "/Teams.VoiceApps/auto-attendants/"
+    },
+    "Set-CsAutoRecordingTemplate": {
+      "cmdlet": "Set-CsAutoRecordingTemplate",
+      "op": "AutoRecordingTemplateSet",
+      "method": "PUT",
+      "path": "/Teams.VoiceApps/auto-recording/"
+    },
+    "Set-CsCallQueue": {
+      "cmdlet": "Set-CsCallQueue",
+      "op": "CallQueueSet",
+      "method": "PUT",
+      "path": "/Teams.VoiceApps/callqueues/"
+    },
+    "Set-CsComplianceRecordingForCallQueueTemplate": {
+      "cmdlet": "Set-CsComplianceRecordingForCallQueueTemplate",
+      "op": "ComplianceRecordingForCallQueueTemplateSet",
+      "method": "PUT",
+      "path": "/Teams.VoiceApps/compliance-recording/"
+    },
+    "Set-CsMainlineAttendantAppointmentBookingFlow": {
+      "cmdlet": "Set-CsMainlineAttendantAppointmentBookingFlow",
+      "op": "MainlineAttendantAppointmentBookingFlowSet",
+      "method": "PUT",
+      "path": "/Teams.VoiceApps/mainline-attendant-flow/appointment-booking/"
+    },
+    "Set-CsMainlineAttendantQuestionAnswerFlow": {
+      "cmdlet": "Set-CsMainlineAttendantQuestionAnswerFlow",
+      "op": "MainlineAttendantQuestionAnswerFlowSet",
+      "method": "PUT",
+      "path": "/Teams.VoiceApps/mainline-attendant-flow/question-answer/"
+    },
+    "Set-CsOnlineEnhancedEmergencyServiceDisclaimer": {
+      "cmdlet": "Set-CsOnlineEnhancedEmergencyServiceDisclaimer",
+      "op": "OnlineEnhancedEmergencyServiceDisclaimerSet",
+      "method": "POST",
+      "path": "/Skype.Ncs/EmergencyDisclaimer/response"
+    },
+    "Set-CsOnlineSchedule": {
+      "cmdlet": "Set-CsOnlineSchedule",
+      "op": "OnlineScheduleSet",
+      "method": "PUT",
+      "path": "/Teams.VoiceApps/schedules/"
+    },
+    "Set-CsPersonalAttendantSettings": {
+      "cmdlet": "Set-CsPersonalAttendantSettings",
+      "op": "PersonalAttendantSettingsSet",
+      "method": "POST",
+      "path": "/Skype.VoiceGroup/personalAttendantSettings/"
+    },
+    "Set-CsPhoneNumberAssignmentBlock": {
+      "cmdlet": "Set-CsPhoneNumberAssignmentBlock",
+      "op": "PhoneNumberAssignmentBlockSet",
+      "method": "POST",
+      "path": "/Skype.TelephoneNumberMgmt/cmdlet/number-assignment-block"
+    },
+    "Set-CsPhoneNumberSmsActivation": {
+      "cmdlet": "Set-CsPhoneNumberSmsActivation",
+      "op": "PhoneNumberSmsActivationSet",
+      "method": "POST",
+      "path": "/Skype.TelephoneNumberMgmt/cmdlet/activate-sms"
+    },
+    "Set-CsPhoneNumberTag": {
+      "cmdlet": "Set-CsPhoneNumberTag",
+      "op": "PhoneNumberTagSet",
+      "method": "POST",
+      "path": "/Skype.TelephoneNumberMgmt/cmdlet/phone-number-tag?phoneNumber="
+    },
+    "Set-CsSharedCallHistoryTemplate": {
+      "cmdlet": "Set-CsSharedCallHistoryTemplate",
+      "op": "SharedCallQueueHistoryTemplateSet",
+      "method": "PUT",
+      "path": "/Teams.VoiceApps/shared-call-history-template/"
+    },
+    "Set-CsSharedCallQueueHistoryTemplate": {
+      "cmdlet": "Set-CsSharedCallQueueHistoryTemplate",
+      "op": "SharedCallQueueHistoryTemplateSet",
+      "method": "PUT",
+      "path": "/Teams.VoiceApps/shared-call-history-template/"
+    },
+    "Set-CsSharedVoicemailTriageSettingsTemplate": {
+      "cmdlet": "Set-CsSharedVoicemailTriageSettingsTemplate",
+      "op": "SharedVoicemailTriageSettingsTemplateSet",
+      "method": "PUT",
+      "path": "/Teams.VoiceApps/shared-voicemail-triage-settings/"
+    },
+    "Set-CsTagsTemplate": {
+      "cmdlet": "Set-CsTagsTemplate",
+      "op": "TagsTemplateSet",
+      "method": "PUT",
+      "path": "/Teams.VoiceApps/ivr-tags-template/"
+    },
+    "Set-CsTeamsSettingsCustomApp": {
+      "cmdlet": "Set-CsTeamsSettingsCustomApp",
+      "op": "TeamsSettingsCustomAppSet",
+      "method": "PUT",
+      "path": "/Teams.MiddletierService/tenantWideAppsSettingsGlobal"
+    },
+    "Set-CsTeamsShiftsConnection": {
+      "cmdlet": "Set-CsTeamsShiftsConnection",
+      "op": "TeamsSetShiftsConnections",
+      "method": "PUT",
+      "path": "/Teams.ShiftsConnector/api/v2/connections/"
+    },
+    "Set-CsTeamsShiftsConnectionInstance": {
+      "cmdlet": "Set-CsTeamsShiftsConnectionInstance",
+      "op": "TeamsSetShiftsConnectionsInstance",
+      "method": "PUT",
+      "path": "/Teams.ShiftsConnector/api/v2/connectorinstances/"
+    },
+    "Set-CsUserCallingSettings": {
+      "cmdlet": "Set-CsUserCallingSettings",
+      "op": "UserCallingSettingsSet",
+      "method": "POST",
+      "path": "/Skype.VoiceGroup/userRoutingSettings/"
+    },
+    "Test-CsTeamsTranslationRule": {
+      "cmdlet": "Test-CsTeamsTranslationRule",
+      "op": "TeamsTranslationRuleTest",
+      "method": "GET",
+      "path": "/Teams.PstnHub/translationrule?phoneNumber="
+    },
+    "Test-CsTeamsUnassignedNumberTreatment": {
+      "cmdlet": "Test-CsTeamsUnassignedNumberTreatment",
+      "op": "TeamsUnassignedNumberTreatmentTest",
+      "method": "GET",
+      "path": "/Teams.PstnHub/unassignednumber?phoneNumber="
+    },
+    "Update-CsAutoAttendant": {
+      "cmdlet": "Update-CsAutoAttendant",
+      "op": "AutoAttendantsUpdate",
+      "method": "POST",
+      "path": "/Teams.VoiceApps/auto-attendants/"
+    },
+    "Update-CsCustomPolicyPackage": {
+      "cmdlet": "Update-CsCustomPolicyPackage",
+      "op": "CustomPolicyPackageUpdate",
+      "method": "PUT",
+      "path": "/Teams.VerticalPackaging/package/custompackage"
+    },
+    "Update-CsPhoneNumberTag": {
+      "cmdlet": "Update-CsPhoneNumberTag",
+      "op": "PhoneNumberTagUpdate",
+      "method": "PATCH",
+      "path": "/Skype.TelephoneNumberMgmt/cmdlet/phone-number-tag?newTag="
+    },
+    "Update-CsTeamTemplate": {
+      "cmdlet": "Update-CsTeamTemplate",
+      "op": "TeamTemplateUpdate",
+      "method": "PUT",
+      "path": "/Teams.Templates/"
+    },
+    "Update-CsTeamsShiftsConnection": {
+      "cmdlet": "Update-CsTeamsShiftsConnection",
+      "op": "TeamsUpdateShiftsConnection",
+      "method": "PATCH",
+      "path": "/Teams.ShiftsConnector/api/v2/connections/"
+    },
+    "Update-CsTeamsShiftsConnectionInstance": {
+      "cmdlet": "Update-CsTeamsShiftsConnectionInstance",
+      "op": "TeamsUpdateShiftsConnectionsInstance",
+      "method": "PATCH",
+      "path": "/Teams.ShiftsConnector/api/v2/connectorinstances/"
+    }
+  }
+}

@@ -1,0 +1,63 @@
+name: Regenerate SDK
+
+# Regenerates the typed bindings (cs/) and models (models/) from the *committed*
+# cmdlet catalog and opens a PR if the generated Go drifts from what is checked in
+# — e.g. after a catalog update or a change to the generators.
+#
+# Unlike the go-exoscc refresh (which pulls a live psm1 from a tenant), Teams keeps
+# the decompile + catalog derivation in the private `teams-powershell-api-re`
+# factory (`just publish ../go-teams`) so no decompiled Microsoft sources ever land
+# here. This workflow only re-runs the deterministic code generators over the
+# already-committed factual catalog; it needs no tenant, secret or OIDC token.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "spec/catalog/**"
+      - "cmd/gen-go/**"
+      - "cmd/gen-models/**"
+      - ".github/workflows/refresh-spec.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - name: Regenerate bindings + models from the committed catalog
+        run: |
+          go run ./cmd/gen-go
+          go run ./cmd/gen-models
+
+      - name: Build + test the regenerated SDK
+        run: |
+          go build ./...
+          go test ./...
+
+      - name: Open PR on change
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        with:
+          title: "chore: regenerate bindings from the committed catalog"
+          commit-message: "chore: regenerate bindings from the committed catalog"
+          branch: automated/regenerate
+          delete-branch: true
+          body: |
+            Automated regeneration from the committed cmdlet catalog
+            (`cmd/gen-go` -> `cs/`, `cmd/gen-models` -> `models/`).
+
+            The catalog itself is derived in the private `teams-powershell-api-re`
+            factory; only the deterministic generator output changes here.
+          add-paths: |
+            cs/**
+            models/**

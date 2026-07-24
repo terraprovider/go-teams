@@ -1,0 +1,43 @@
+name: Live validation
+
+# Read-only smoke test of the generated bindings against a live tenant: connects
+# app-only via a GitHub OIDC federated credential (no stored secret), performs the
+# serviceDiscovery handshake and reads a sample of in-scope policy types. Fails if
+# the wire fingerprint is rejected or a binding stops decoding — catching drift
+# between the committed catalog and the live Admin API.
+#
+# Repo configuration (Settings -> Secrets and variables -> Actions -> Variables):
+#   ARM_TENANT_ID  - tenant GUID
+#   ARM_CLIENT_ID  - Entra app (client) ID whose federated credential trusts this
+#                    repo's OIDC subject (audience api://AzureADTokenExchange), with
+#                    a Teams-admin directory role on its service principal.
+# (Terraform-style ARM_* names so the same app/credentials drive the TF provider.)
+
+on:
+  schedule:
+    - cron: "0 7 * * 1" # weekly, Monday 07:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write # required for the GitHub OIDC token
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - name: Live validation (app-only via GitHub OIDC federated credential)
+        env:
+          ARM_TENANT_ID: ${{ vars.ARM_TENANT_ID }}
+          ARM_CLIENT_ID: ${{ vars.ARM_CLIENT_ID }}
+          ARM_USE_OIDC: "true"
+        run: |
+          test -n "$ARM_TENANT_ID" -a -n "$ARM_CLIENT_ID" || { echo "::error::set ARM_TENANT_ID / ARM_CLIENT_ID repo variables"; exit 1; }
+          go run ./cmd/verify

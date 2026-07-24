@@ -1,0 +1,33 @@
+version: 2
+
+# Dependency update automation, grouped so routine updates arrive as a few
+# reviewable PRs rather than one per dependency.
+updates:
+  # Go modules.
+  - package-ecosystem: gomod
+    directory: "/"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    groups:
+      # MSAL / Azure identity libs version together.
+      azure-identity:
+        patterns:
+          - "github.com/AzureAD/*"
+          - "github.com/Azure/*"
+      # Batch minor/patch bumps; leave majors as individual PRs for review.
+      go-minor-patch:
+        update-types:
+          - minor
+          - patch
+
+  # GitHub Actions used by the workflows (all SHA-pinned; Dependabot bumps them safely).
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    groups:
+      github-actions:
+        patterns:
+          - "*"
