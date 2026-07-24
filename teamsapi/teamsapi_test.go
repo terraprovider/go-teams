@@ -210,4 +210,45 @@ func TestFilterByIdentityTagPrefix(t *testing.T) {
 	}
 }
 
+// TestPolicyGrantRoutes covers the grant/assignment routing: the policy TYPE and
+// target live in the PATH (decompiled {User,Group,Global}GrantPolicy), and the
+// body carries only the instance name (plus Rank for groups) — never PolicyType.
+func TestPolicyGrantRoutes(t *testing.T) {
+	var c Client
+	op := Op{Kind: PolicyGrant, PolicyName: "TeamsMeetingPolicy"}
+	cases := []struct {
+		name, wantPath string
+		params         map[string]any
+	}{
+		{"user", "/Skype.Policy/users/user@x/policies/TeamsMeetingPolicy",
+			map[string]any{"Identity": "user@x", "PolicyName": "Tag:Foo"}},
+		{"group", "/Skype.Policy/groupPolicyAssignments/g1/policyTypes/TeamsMeetingPolicy",
+			map[string]any{"Group": "g1", "PolicyName": "Tag:Foo", "Rank": int64(1)}},
+		{"global", "/Skype.Policy/tenants/policies/TeamsMeetingPolicy",
+			map[string]any{"Global": true, "PolicyName": "Tag:Foo"}},
+	}
+	for _, tc := range cases {
+		m, p, body, err := c.resolve(op, tc.params)
+		if err != nil {
+			t.Fatalf("%s: resolve: %v", tc.name, err)
+		}
+		if m != http.MethodPatch {
+			t.Errorf("%s: method = %s, want PATCH", tc.name, m)
+		}
+		if p != tc.wantPath {
+			t.Errorf("%s: path = %s, want %s", tc.name, p, tc.wantPath)
+		}
+		var b map[string]any
+		if err := json.Unmarshal(body, &b); err != nil {
+			t.Fatalf("%s: body not JSON: %v", tc.name, err)
+		}
+		if _, ok := b["PolicyType"]; ok {
+			t.Errorf("%s: body must not carry PolicyType (it is in the path): %s", tc.name, body)
+		}
+		if b["PolicyName"] != "Tag:Foo" {
+			t.Errorf("%s: body missing PolicyName: %s", tc.name, body)
+		}
+	}
+}
+
 // Body decoding (br/gzip/deflate) is covered by go-msadmin/httpx tests.

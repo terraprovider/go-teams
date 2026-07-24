@@ -125,27 +125,30 @@ func (c *Client) resolve(op Op, params map[string]any) (method, path string, bod
 		}
 		return m, p, b, err
 	case PolicyGrant:
-		// op.PolicyName is the policy TYPE (e.g. "TeamsMeetingPolicy"); params
-		// carry the instance (PolicyName) and exactly one target.
-		payload := map[string]any{"PolicyType": op.PolicyName}
+		// op.PolicyName is the policy TYPE (e.g. "TeamsMeetingPolicy"). The type and
+		// target go in the PATH (not the body); the body carries only the instance
+		// name (and Rank for groups). Routes decompiled from {User,Group,Global}
+		// GrantPolicy; the user route is live-validated. Grants materialise
+		// asynchronously (the write returns before the assignment is effective).
+		pt := url.PathEscape(op.PolicyName)
+		body := map[string]any{}
 		if v, ok := params["PolicyName"]; ok {
-			payload["PolicyName"] = v
-		}
-		if r, ok := params["Rank"]; ok {
-			payload["Rank"] = r
+			body["PolicyName"] = v
 		}
 		if g, _ := params["Global"].(bool); g {
-			b, err := json.Marshal(payload)
-			return http.MethodPatch, "/Skype.Policy/tenants/policies/" + url.PathEscape(op.PolicyName), b, err
+			b, err := json.Marshal(body)
+			return http.MethodPatch, "/Skype.Policy/tenants/policies/" + pt, b, err
 		}
 		if grp, _ := params["Group"].(string); grp != "" {
-			payload["GroupId"] = grp
-			b, err := json.Marshal(payload)
-			return http.MethodPost, "/Skype.Policy/groupPolicyAssignments", b, err
+			if r, ok := params["Rank"]; ok {
+				body["Rank"] = r
+			}
+			b, err := json.Marshal(body)
+			return http.MethodPatch, "/Skype.Policy/groupPolicyAssignments/" + url.PathEscape(grp) + "/policyTypes/" + pt, b, err
 		}
 		if user, _ := params["Identity"].(string); user != "" {
-			b, err := json.Marshal(payload)
-			return http.MethodPut, "/Skype.Policy/users/" + url.PathEscape(user), b, err
+			b, err := json.Marshal(body)
+			return http.MethodPatch, "/Skype.Policy/users/" + url.PathEscape(user) + "/policies/" + pt, b, err
 		}
 		return "", "", nil, fmt.Errorf("teamsapi: Grant %s: one of -Global/-Group/-Identity is required", op.PolicyName)
 	}
