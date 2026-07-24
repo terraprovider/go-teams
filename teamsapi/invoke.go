@@ -218,10 +218,16 @@ func decodeValue(raw []byte) ([]map[string]any, error) {
 	return nil, fmt.Errorf("unexpected response (not JSON object/array)")
 }
 
+// filterByIdentity keeps the instances whose Identity matches id. Custom policy
+// instances are stored with a "Tag:" scope prefix (New-Cs*Policy -Identity X
+// creates the instance "Tag:X"), but the cmdlets accept — and callers pass — the
+// bare name; so a query for "X" also matches "Tag:X" (and "Global" still matches
+// only "Global"). Passing the already-scoped "Tag:X" matches directly.
 func filterByIdentity(in []map[string]any, id string) []map[string]any {
 	var out []map[string]any
 	for _, o := range in {
-		if s, _ := o["Identity"].(string); strings.EqualFold(s, id) {
+		s, _ := o["Identity"].(string)
+		if strings.EqualFold(s, id) || strings.EqualFold(s, "Tag:"+id) {
 			out = append(out, o)
 		}
 	}

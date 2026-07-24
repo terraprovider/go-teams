@@ -185,4 +185,29 @@ func TestIsNotFound(t *testing.T) {
 	}
 }
 
+// TestFilterByIdentityTagPrefix covers the scope-prefix normalisation: custom
+// policy instances are stored as "Tag:<name>" but callers pass the bare name, so
+// a query for "X" must also match "Tag:X" (while "Global" stays exact).
+func TestFilterByIdentityTagPrefix(t *testing.T) {
+	in := []map[string]any{
+		{"Identity": "Global"},
+		{"Identity": "Tag:Default"},
+		{"Identity": "Tag:MyPolicy"},
+	}
+	for query, want := range map[string]string{
+		"MyPolicy":     "Tag:MyPolicy", // bare name matches the scoped instance
+		"Tag:MyPolicy": "Tag:MyPolicy", // already-scoped matches directly
+		"Default":      "Tag:Default",
+		"Global":       "Global", // built-in is not Tag-scoped
+	} {
+		got := filterByIdentity(in, query)
+		if len(got) != 1 || got[0]["Identity"] != want {
+			t.Errorf("filterByIdentity(%q) = %v, want single %q", query, got, want)
+		}
+	}
+	if got := filterByIdentity(in, "Nonexistent"); len(got) != 0 {
+		t.Errorf("filterByIdentity(Nonexistent) = %v, want empty", got)
+	}
+}
+
 // Body decoding (br/gzip/deflate) is covered by go-msadmin/httpx tests.
