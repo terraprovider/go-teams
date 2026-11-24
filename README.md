@@ -62,7 +62,7 @@ It reproduces the module faithfully:
 - `br`/`gzip`/`deflate` response decoding; `X-MS-Correlation-Id` per request;
   warnings surfaced from `X-Ms-ConfigApi-PowerShell-WarningMessage`;
   `teamsapi.IsNotFound(err)` for 404s; `teamsapi.IsWriteConflict(err)` for the 409s
-  that concurrent writes to one tenant cause (`APIError.Code` 40904/40902, not
+  that concurrent writes to one tenant cause (`APIError.Code` 40904/40902/40903, not
   40901 "already exists"). Throttling/`Retry-After`/5xx retries are the
   default via `go-msadmin/retry` (override `Options.HTTPClient`).
 

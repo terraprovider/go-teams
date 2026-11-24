@@ -78,21 +78,26 @@ func IsNotFound(err error) bool { return httpx.IsNotFound(err) }
 // Teams config API error codes for an HTTP 409 (APIError.Code).
 const (
 	CodeAlreadyExists  = "40901" // the instance exists; repeating the create cannot succeed
-	CodeUpdateConflict = "40902" // a concurrent write to the same tenant's policies
+	CodeUpdateConflict = "40902" // a concurrent update in the same tenant
+	CodeDeleteConflict = "40903" // a concurrent delete in the same tenant
 	CodeCreateConflict = "40904" // a concurrent create in the same tenant
 )
 
 // IsWriteConflict reports whether err is a 409 that a concurrent write to the
-// same tenant caused (CodeCreateConflict, CodeUpdateConflict). Repeating the
-// write after a short wait succeeds. CodeAlreadyExists and every other error
-// are not write conflicts. Terraform providers wire their write-conflict
+// same tenant caused (CodeCreateConflict, CodeUpdateConflict,
+// CodeDeleteConflict). Repeating the write after a short wait succeeds.
+// CodeAlreadyExists and every other error are not write conflicts. Terraform providers wire their write-conflict
 // predicate (genframework Config.WriteConflict) to this.
 func IsWriteConflict(err error) bool {
 	var ae *APIError
 	if !errors.As(err, &ae) || ae.Status != http.StatusConflict {
 		return false
 	}
-	return ae.Code == CodeCreateConflict || ae.Code == CodeUpdateConflict
+	switch ae.Code {
+	case CodeCreateConflict, CodeUpdateConflict, CodeDeleteConflict:
+		return true
+	}
+	return false
 }
 
 // resolve turns an Op + params into (method, path, body).
@@ -272,26 +277,33 @@ func parseAPIError(status int, raw []byte) error {
 	msg := strings.TrimSpace(string(raw))
 	code := ""
 	// Best-effort extraction of a structured error message.
-	// Two envelopes: {"error":{"code","message"}} and the Teams config API's
-	// top-level {"code","message","errorCode"}, where errorCode is the specific
-	// number (40904) and code a generic class (ClientError).
+	// Two envelopes: {"error":{"code","message"}} and the top-level
+	// {"code","message","errorCode"} of the Teams config API, where errorCode is
+	// the specific code (40904, or a string such as "BadRequest") and code a
+	// generic class (ClientError). The code is taken even when the message is
+	// empty; the message then stays the raw body.
 	var env struct {
 		Error struct {
 			Code    string `json:"code"`
 			Message string `json:"message"`
 		} `json:"error"`
-		Code      string          `json:"code"`
+		Code      json.RawMessage `json:"code"`
 		Message   string          `json:"Message"`
 		ErrorCode json.RawMessage `json:"errorCode"`
 	}
 	if json.Unmarshal(raw, &env) == nil {
-		if env.Error.Message != "" {
-			msg, code = env.Error.Message, env.Error.Code
-		} else if env.Message != "" {
-			msg = env.Message
-			code = errorCode(env.ErrorCode)
+		if env.Error.Message != "" || env.Error.Code != "" {
+			code = env.Error.Code
+			if env.Error.Message != "" {
+				msg = env.Error.Message
+			}
+		} else {
+			if env.Message != "" {
+				msg = env.Message
+			}
+			code = scalar(env.ErrorCode)
 			if code == "" {
-				code = env.Code
+				code = scalar(env.Code)
 			}
 		}
 	}
@@ -307,9 +319,13 @@ func parseAPIError(status int, raw []byte) error {
 	return &APIError{Status: status, Code: code, Message: msg, Body: string(raw)}
 }
 
-// errorCode returns the Teams errorCode, which the API sends as a JSON number
-// but which is also accepted as a string; "" when absent or of another type.
-func errorCode(raw json.RawMessage) string {
+// scalar returns a JSON string or number as text; "" when raw is absent, null
+// or of another type.
+func scalar(raw json.RawMessage) string {
+	var str string
+	if json.Unmarshal(raw, &str) == nil {
+		return str
+	}
 	var n json.Number
 	if json.Unmarshal(raw, &n) == nil {
 		return n.String()
