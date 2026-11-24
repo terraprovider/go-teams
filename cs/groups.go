@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
+	"sort"
 	"strconv"
 	"strings"
 
@@ -120,4 +121,86 @@ func int64Field(row map[string]any, key string) (int64, bool) {
 		return n, err == nil
 	}
 	return 0, false
+}
+
+// GroupAssignment is one group's assignment of a policy type: the bare instance
+// name (no "Tag:" prefix) and its one-based rank among that type's group
+// assignments.
+type GroupAssignment struct {
+	GroupID    string
+	PolicyName string
+	Rank       int64
+}
+
+// GroupPolicyAssignments lists the group assignments of policyType, sorted by
+// rank (then group ID).
+//
+// It reads GET /Skype.Policy/groupPolicyAssignments?policyType={policyType}: a
+// bare array of the rows GroupPolicyAssignment describes, unordered and without
+// paging (live, 2026-11). The server ignores an unknown query parameter and then
+// returns every type, so rows are filtered by policyType here as well
+// (case-insensitively). An empty list is [], not 404, so a 404 is an error.
+//
+// Like GroupPolicyAssignment, the list follows grants asynchronously.
+func (s *Service) GroupPolicyAssignments(ctx context.Context, policyType string) ([]GroupAssignment, error) {
+	if policyType == "" {
+		return nil, fmt.Errorf("cs: GroupPolicyAssignments: policyType is required")
+	}
+	res, err := s.C.Invoke(ctx, teamsapi.Op{
+		CmdletName: "Get-CsGroupPolicyAssignment",
+		Transport:  teamsapi.ConfigAPI,
+		Kind:       teamsapi.AutoRest,
+		Method:     http.MethodGet,
+		Path:       "/Skype.Policy/groupPolicyAssignments?policyType=" + url.QueryEscape(policyType),
+	}, nil)
+	if err != nil {
+		return nil, err
+	}
+	if res == nil {
+		return nil, nil
+	}
+	return groupPolicyAssignments(res.Value, policyType)
+}
+
+// GroupPolicyAssignmentCount returns the number of group assignments of
+// policyType: the highest rank a grant can reach without being placed last
+// (one more for a group that has no assignment of the type yet).
+func (s *Service) GroupPolicyAssignmentCount(ctx context.Context, policyType string) (int64, error) {
+	list, err := s.GroupPolicyAssignments(ctx, policyType)
+	return int64(len(list)), err
+}
+
+// groupPolicyAssignments is the decoding logic behind GroupPolicyAssignments.
+func groupPolicyAssignments(rows []map[string]any, policyType string) ([]GroupAssignment, error) {
+	var out []GroupAssignment
+	seen := map[string]bool{}
+	for _, row := range rows {
+		if !strings.EqualFold(stringField(row, "policyType"), policyType) {
+			continue
+		}
+		g := stringField(row, "groupId")
+		if g == "" {
+			return nil, fmt.Errorf("cs: group policy assignment of %s has no groupId", policyType)
+		}
+		if seen[strings.ToLower(g)] {
+			return nil, fmt.Errorf("cs: multiple group policy assignments for %s/%s", g, policyType)
+		}
+		seen[strings.ToLower(g)] = true
+		name := stripTag(stringField(row, "policyName"))
+		if name == "" {
+			return nil, fmt.Errorf("cs: group policy assignment %s/%s has no policyName", g, policyType)
+		}
+		rank, ok := int64Field(row, "priority")
+		if !ok || rank < 1 {
+			return nil, fmt.Errorf("cs: group policy assignment %s/%s has no valid priority (one-based rank)", g, policyType)
+		}
+		out = append(out, GroupAssignment{GroupID: g, PolicyName: name, Rank: rank})
+	}
+	sort.Slice(out, func(i, j int) bool {
+		if out[i].Rank != out[j].Rank {
+			return out[i].Rank < out[j].Rank
+		}
+		return strings.ToLower(out[i].GroupID) < strings.ToLower(out[j].GroupID)
+	})
+	return out, nil
 }
