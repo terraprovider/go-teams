@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -73,6 +74,26 @@ type APIError = httpx.APIError
 // Terraform providers wire their isNotFound helper to this (or to httpx.IsNotFound
 // directly).
 func IsNotFound(err error) bool { return httpx.IsNotFound(err) }
+
+// Teams config API error codes for an HTTP 409 (APIError.Code).
+const (
+	CodeAlreadyExists  = "40901" // the instance exists; repeating the create cannot succeed
+	CodeUpdateConflict = "40902" // a concurrent write to the same tenant's policies
+	CodeCreateConflict = "40904" // a concurrent create in the same tenant
+)
+
+// IsWriteConflict reports whether err is a 409 that a concurrent write to the
+// same tenant caused (CodeCreateConflict, CodeUpdateConflict). Repeating the
+// write after a short wait succeeds. CodeAlreadyExists and every other error
+// are not write conflicts. Terraform providers wire their write-conflict
+// predicate (genframework Config.WriteConflict) to this.
+func IsWriteConflict(err error) bool {
+	var ae *APIError
+	if !errors.As(err, &ae) || ae.Status != http.StatusConflict {
+		return false
+	}
+	return ae.Code == CodeCreateConflict || ae.Code == CodeUpdateConflict
+}
 
 // resolve turns an Op + params into (method, path, body).
 func (c *Client) resolve(op Op, params map[string]any) (method, path string, body []byte, err error) {
@@ -251,18 +272,27 @@ func parseAPIError(status int, raw []byte) error {
 	msg := strings.TrimSpace(string(raw))
 	code := ""
 	// Best-effort extraction of a structured error message.
+	// Two envelopes: {"error":{"code","message"}} and the Teams config API's
+	// top-level {"code","message","errorCode"}, where errorCode is the specific
+	// number (40904) and code a generic class (ClientError).
 	var env struct {
 		Error struct {
 			Code    string `json:"code"`
 			Message string `json:"message"`
 		} `json:"error"`
-		Message string `json:"Message"`
+		Code      string          `json:"code"`
+		Message   string          `json:"Message"`
+		ErrorCode json.RawMessage `json:"errorCode"`
 	}
 	if json.Unmarshal(raw, &env) == nil {
 		if env.Error.Message != "" {
 			msg, code = env.Error.Message, env.Error.Code
 		} else if env.Message != "" {
 			msg = env.Message
+			code = errorCode(env.ErrorCode)
+			if code == "" {
+				code = env.Code
+			}
 		}
 	}
 	if len(msg) > 600 {
@@ -275,4 +305,14 @@ func parseAPIError(status int, raw []byte) error {
 		msg += " — the app's service principal likely lacks a Teams admin directory role (assign one for app-only)"
 	}
 	return &APIError{Status: status, Code: code, Message: msg, Body: string(raw)}
+}
+
+// errorCode returns the Teams errorCode, which the API sends as a JSON number
+// but which is also accepted as a string; "" when absent or of another type.
+func errorCode(raw json.RawMessage) string {
+	var n json.Number
+	if json.Unmarshal(raw, &n) == nil {
+		return n.String()
+	}
+	return ""
 }
