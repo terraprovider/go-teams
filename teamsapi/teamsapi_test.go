@@ -212,19 +212,37 @@ func TestFilterByIdentityTagPrefix(t *testing.T) {
 
 // TestPolicyGrantRoutes covers the grant/assignment routing: the policy TYPE and
 // target live in the PATH (decompiled {User,Group,Global}GrantPolicy), and the
-// body carries only the instance name (plus Rank for groups) — never PolicyType.
+// body carries only the instance name (plus the rank for groups) — never
+// PolicyType. The group route is POST with a camelCase {"policyName","priority"}
+// body, and a missing PolicyName unassigns with {"policyName": null}. The user
+// route unassigns with an empty PATCH body {} (live-validated).
 func TestPolicyGrantRoutes(t *testing.T) {
 	var c Client
 	op := Op{Kind: PolicyGrant, PolicyName: "TeamsMeetingPolicy"}
 	cases := []struct {
-		name, wantPath string
-		params         map[string]any
+		name, wantMethod, wantPath, wantBody string
+		params                               map[string]any
 	}{
-		{"user", "/Skype.Policy/users/user@x/policies/TeamsMeetingPolicy",
+		{"user", http.MethodPatch, "/Skype.Policy/users/user@x/policies/TeamsMeetingPolicy",
+			`{"PolicyName":"Tag:Foo"}`,
 			map[string]any{"Identity": "user@x", "PolicyName": "Tag:Foo"}},
-		{"group", "/Skype.Policy/groupPolicyAssignments/g1/policyTypes/TeamsMeetingPolicy",
-			map[string]any{"Group": "g1", "PolicyName": "Tag:Foo", "Rank": int64(1)}},
-		{"global", "/Skype.Policy/tenants/policies/TeamsMeetingPolicy",
+		{"user unassign", http.MethodPatch, "/Skype.Policy/users/user@x/policies/TeamsMeetingPolicy",
+			`{}`,
+			map[string]any{"Identity": "user@x"}},
+		{"group", http.MethodPost, "/Skype.Policy/groupPolicyAssignments/g1/policyTypes/TeamsMeetingPolicy",
+			`{"policyName":"Foo","priority":2}`,
+			map[string]any{"Group": "g1", "PolicyName": "Foo", "Rank": int64(2)}},
+		{"group without rank", http.MethodPost, "/Skype.Policy/groupPolicyAssignments/g1/policyTypes/TeamsMeetingPolicy",
+			`{"policyName":"Foo"}`,
+			map[string]any{"Group": "g1", "PolicyName": "Foo"}},
+		{"group unassign", http.MethodPost, "/Skype.Policy/groupPolicyAssignments/g1/policyTypes/TeamsMeetingPolicy",
+			`{"policyName":null}`,
+			map[string]any{"Group": "g1"}},
+		{"group unassign ignores rank", http.MethodPost, "/Skype.Policy/groupPolicyAssignments/g1/policyTypes/TeamsMeetingPolicy",
+			`{"policyName":null}`,
+			map[string]any{"Group": "g1", "Rank": int64(1)}},
+		{"global", http.MethodPatch, "/Skype.Policy/tenants/policies/TeamsMeetingPolicy",
+			`{"PolicyName":"Tag:Foo"}`,
 			map[string]any{"Global": true, "PolicyName": "Tag:Foo"}},
 	}
 	for _, tc := range cases {
@@ -232,21 +250,14 @@ func TestPolicyGrantRoutes(t *testing.T) {
 		if err != nil {
 			t.Fatalf("%s: resolve: %v", tc.name, err)
 		}
-		if m != http.MethodPatch {
-			t.Errorf("%s: method = %s, want PATCH", tc.name, m)
+		if m != tc.wantMethod {
+			t.Errorf("%s: method = %s, want %s", tc.name, m, tc.wantMethod)
 		}
 		if p != tc.wantPath {
 			t.Errorf("%s: path = %s, want %s", tc.name, p, tc.wantPath)
 		}
-		var b map[string]any
-		if err := json.Unmarshal(body, &b); err != nil {
-			t.Fatalf("%s: body not JSON: %v", tc.name, err)
-		}
-		if _, ok := b["PolicyType"]; ok {
-			t.Errorf("%s: body must not carry PolicyType (it is in the path): %s", tc.name, body)
-		}
-		if b["PolicyName"] != "Tag:Foo" {
-			t.Errorf("%s: body missing PolicyName: %s", tc.name, body)
+		if string(body) != tc.wantBody {
+			t.Errorf("%s: body = %s, want %s", tc.name, body, tc.wantBody)
 		}
 	}
 }

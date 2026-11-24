@@ -127,8 +127,8 @@ func (c *Client) resolve(op Op, params map[string]any) (method, path string, bod
 	case PolicyGrant:
 		// op.PolicyName is the policy TYPE (e.g. "TeamsMeetingPolicy"). The type and
 		// target go in the PATH (not the body); the body carries only the instance
-		// name (and Rank for groups). Routes decompiled from {User,Group,Global}
-		// GrantPolicy; the user route is live-validated. Grants materialise
+		// name (and the rank for groups). Routes decompiled from {User,Group,Global}
+		// GrantPolicy; the user and group routes are live-validated. Grants materialise
 		// asynchronously (the write returns before the assignment is effective).
 		pt := url.PathEscape(op.PolicyName)
 		body := map[string]any{}
@@ -140,13 +140,23 @@ func (c *Client) resolve(op Op, params map[string]any) (method, path string, bod
 			return http.MethodPatch, "/Skype.Policy/tenants/policies/" + pt, b, err
 		}
 		if grp, _ := params["Group"].(string); grp != "" {
-			if r, ok := params["Rank"]; ok {
-				body["Rank"] = r
+			// The group route differs from the user/global ones (MicrosoftTeams
+			// GrantToGroupAsync/GroupGrantPayload, live-validated): POST, not PATCH
+			// (PATCH only updates an existing assignment and 404s on create), and a
+			// camelCase body with the one-based rank as "priority". A missing
+			// PolicyName (the generated params drop "") sends {"policyName": null},
+			// which removes the group's assignment for this type.
+			name, ok := params["PolicyName"]
+			gb := map[string]any{"policyName": name}
+			if r, hasRank := params["Rank"]; ok && hasRank {
+				gb["priority"] = r
 			}
-			b, err := json.Marshal(body)
-			return http.MethodPatch, "/Skype.Policy/groupPolicyAssignments/" + url.PathEscape(grp) + "/policyTypes/" + pt, b, err
+			b, err := json.Marshal(gb)
+			return http.MethodPost, "/Skype.Policy/groupPolicyAssignments/" + url.PathEscape(grp) + "/policyTypes/" + pt, b, err
 		}
 		if user, _ := params["Identity"].(string); user != "" {
+			// A missing PolicyName sends {}, which removes the direct assignment
+			// (live-validated).
 			b, err := json.Marshal(body)
 			return http.MethodPatch, "/Skype.Policy/users/" + url.PathEscape(user) + "/policies/" + pt, b, err
 		}
